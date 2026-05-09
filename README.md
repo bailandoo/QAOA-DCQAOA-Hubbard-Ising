@@ -39,26 +39,46 @@ The repository includes implementations of the standard Quantum Approximate Opti
 
 ## Running locally
 
+From the main repository directory:
+
 ```bash
 python scripts/QAOA.py 1
+```
+
+or:
+
+```bash
 python scripts/DC-QAOA.py 1
 ```
 
+The argument `1` is the job index / seed parameter passed to the Python script.
+
 ## Running on HPC with Slurm
 
-Example for QAOA:
+The repository contains two helper scripts for running jobs on an HPC cluster with Slurm:
+
+- `hpc/submit_jobs.sh` submits a range of jobs.
+- `hpc/run_job.sh` defines the Slurm job configuration and runs the selected Python script.
+
+Example:
 
 ```bash
-bash hpc/submit_jobs.sh 1 20 QAOA.py
+bash hpc/submit_jobs.sh 1 20
 ```
 
-Example for DC-QAOA:
+This submits jobs with indices from `1` to `20`.
+
+The script executed on the cluster is selected inside `hpc/run_job.sh`. For standard QAOA, use:
 
 ```bash
-bash hpc/submit_jobs.sh 1 20 DC-QAOA.py
+python scripts/QAOA.py "$j"
 ```
 
-The first two arguments define the range of job indices. The third argument selects the Python script that should be executed.
+For DC-QAOA, replace the last line with:
+
+```bash
+python scripts/DC-QAOA.py "$j"
+```
 
 ## Reference
 
