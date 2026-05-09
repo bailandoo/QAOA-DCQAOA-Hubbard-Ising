@@ -12,10 +12,5 @@ source ~/.bashrc
 mamba activate mag
 
 j="$var1"
-script_name=${script_name:-QAOA.py}
 
-if [ -n "$repo_root" ]; then
-    cd "$repo_root"
-fi
-
-python "$script_name" "$j"
+python QAOA.py "$j"
